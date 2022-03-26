@@ -1,0 +1,10 @@
+#
+---
+  - name: "Run tasks to get ready for podman hacking"
+    hosts: "role_{{ project_tag }}_node"
+    roles:
+    - role: podman_hacking
+      # intended to run as 'fedora' user, so no on 'become'
+      become: no 
+
+  
