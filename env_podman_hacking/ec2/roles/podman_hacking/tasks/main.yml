@@ -46,7 +46,9 @@
     - libselinux-devel 
     - make 
     - pkgconfig
+    # Other deps I found I needed beyond what is documented
     - netcat
+    - openssl
   become: yes
 
 # Installing podman4 RPM to get associated deps, will manually remove later and use what we build from source
@@ -69,3 +71,8 @@
   ansible.builtin.command: make binaries
   args:
     chdir: "{{ user_home.stdout }}/src/podman"
+
+- name: Copy a hack for helping to run podman tests
+  ansible.builtin.copy:
+    src: files/run_one_test.sh
+    dest: "{{ user_home.stdout }}/src/podman" 
