@@ -12,9 +12,6 @@
     path: "{{ user_home.stdout }}/src"
     state: directory
 
-- git:
-    repo: 'https://github.com/containers/podman.git'
-    dest: "{{ user_home.stdout }}/src/podman"
 
 - name: Enable Fedora Copr for Podman 4
   community.general.copr:
@@ -61,6 +58,11 @@
     - jq
     - podman
   become: yes
+
+#Note below is checking out a fork
+- git:
+    repo: 'https://github.com/jwmatthews/podman.git'
+    dest: "{{ user_home.stdout }}/src/podman"
 
 - name: make install.tools
   ansible.builtin.command: make install.tools
