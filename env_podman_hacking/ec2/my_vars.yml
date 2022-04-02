@@ -15,9 +15,19 @@ ec2_ssh_key_dir: "./keys"
 ec2_ssh_key_file_path: "{{ ec2_ssh_key_dir }}/{{ project_tag }}_{{ region_name }}.pem"
 ansible_ssh_private_key_file: "{{ ec2_ssh_key_file_path }}"
 
+# x86_64
+#architecture: 'x86_64'
 #instance_type: 't3.micro'
 #instance_type: 't3.large'
-instance_type: 't3.2xlarge'
+#instance_type: 't3.2xlarge'
+
+
+# arm64
+architecture: 'arm64'
+# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-arm64.html
+# https://aws.amazon.com/ec2/instance-types/t4/
+# https://aws.amazon.com/ec2/spot/pricing/
+instance_type: 't4g.medium'
 
 
 # VPC

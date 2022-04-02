@@ -95,7 +95,7 @@
         filters:
           #name: "CentOS Stream 8*"
           name: "Fedora-Cloud-Base-35-*"
-          architecture: "x86_64"
+          architecture: "{{ architecture }}"
       register: findami  
 
     - name: Sort the latest Fedora AMIs
