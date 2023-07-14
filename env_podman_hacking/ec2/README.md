@@ -20,7 +20,6 @@ This directory contains ansible automation to create a single ec2 host and insta
  * You can run `init.sh` which will execute the below commands
    * Install Virtualenv
       ```
-      python3 -m pip install --user virtualenv
       python3 -m venv env
       ```
 
@@ -44,7 +43,7 @@ This directory contains ansible automation to create a single ec2 host and insta
 ## Customizations
  * If you want to run this for yourself without stepping on anyone else, then change the below:
    * Edit [my_vars.yml](my_vars.yml) and change the value of `project_tag` to something unique
-   * Update [lab_hosts.aws_ec2.yml](lab_hosts.aws_ec2.yml) and change this line "`- jwm_hack_podman*`" to match your new `project_tag` 
+   * Update [my_hosts.aws_ec2.yml](my_hosts.aws_ec2.yml) and change this line "`- jwm_hack_podman*`" to match your new `project_tag` 
 
 ## To create the environments
 1. ./create_infra.sh

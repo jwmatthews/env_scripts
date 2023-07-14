@@ -1,13 +1,8 @@
 my_name: jwm
-project_tag: "{{ my_name }}_hack_podman"
+project_tag: "{{ my_name }}_hack_podman_July2023"
 
 # How many instances do we want to provision
 desired_num_instances: 1
-
-# You can ignore below and leave as-is, unless you are creating many instances
-# I've observed bad performance trying to create 40 instances at a time (~6 hours)
-# Create/Setup of 20 instances is ~ <30 mins, so batching creation and changing batch name below to help
-batch_name: batch1
 
 region_name: "us-east-1"
 key_name: '{{ project_tag }}_keypair'
@@ -15,19 +10,30 @@ ec2_ssh_key_dir: "./keys"
 ec2_ssh_key_file_path: "{{ ec2_ssh_key_dir }}/{{ project_tag }}_{{ region_name }}.pem"
 ansible_ssh_private_key_file: "{{ ec2_ssh_key_file_path }}"
 
+##
+# If you are running a Fedora AMI you need to ensure your ./ansible.cfg file has the following:
+# remote_user = fedora
+#
+# If you are running a CentOS AMI you need to ensure your ./ansible.cfg file has the following:
+# remote_user = ec2-user
+##
+ami_owners: 125523088429 # CentOS/Fedora Owner ID
+#ami_name_filter: "CentOS Stream 9*"
+#ami_name_filter: "CentOS Stream 8*"
+ami_name_filter: "Fedora-Cloud-Base-38-*"
+
 # x86_64
-#architecture: 'x86_64'
+architecture: 'x86_64'
 #instance_type: 't3.micro'
-#instance_type: 't3.large'
+instance_type: 't3.large'
 #instance_type: 't3.2xlarge'
 
-
 # arm64
-architecture: 'arm64'
+#architecture: 'arm64'
 # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-arm64.html
 # https://aws.amazon.com/ec2/instance-types/t4/
 # https://aws.amazon.com/ec2/spot/pricing/
-instance_type: 't4g.medium'
+#instance_type: 't4g.medium'
 
 
 # VPC

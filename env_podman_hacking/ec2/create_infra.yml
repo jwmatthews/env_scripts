@@ -87,25 +87,23 @@
         state: "present"
       register: security_group
 
-    - name: Find latest Fedora 35 AMIs  
+    - name: Find latest Fedora/CentOS AMIs  
       amazon.aws.ec2_ami_info:
-        #owners: 125523088429 # CentOS Owner ID
-        owners: 125523088429 # Fedora Owner ID
+        owners: "{{ ami_owners }}"
         region: "{{ region_name }}"
         filters:
-          #name: "CentOS Stream 8*"
-          name: "Fedora-Cloud-Base-35-*"
+          name: "{{ ami_name_filter }}"
           architecture: "{{ architecture }}"
       register: findami  
 
-    - name: Sort the latest Fedora AMIs
+    - name: Sort the latest {{ ami_name_filter }} AMIs
       set_fact:
-        latest_fedora_ami: >
+        latest_ami: >
           {{ findami.images | sort(attribute='creation_date') | last }} 
       
     - name: Create EC2 Instances
       amazon.aws.ec2_instance:
-        image_id: "{{ latest_fedora_ami.image_id }}"
+        image_id: "{{ latest_ami.image_id }}"
         wait: yes
         instance_type: "{{ instance_type }}"
         region: "{{ region_name }}"
