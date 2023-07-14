@@ -13,9 +13,9 @@
     state: directory
 
 
-- name: Enable Fedora Copr for Podman 4
+- name: Enable Fedora Copr for Podman Next
   community.general.copr:
-    name: rhcontainerbot/podman4
+    name: rhcontainerbot/podman-next
   become: yes
 
 - name: Install/Upgrade podman devel deps
